@@ -40,7 +40,7 @@ try {
     assert.equal(response.headers.get('x-frame-options'), 'SAMEORIGIN');
     assert.equal(response.headers.get('referrer-policy'), 'strict-origin-when-cross-origin');
     const html = await response.text();
-    assert.match(html, /WeKnora/i, path);
+    assert.match(html, /ZS-HiAI/i, path);
     for (const [, asset] of html.matchAll(/(?:src|href)="([^"?#]+\.(?:js|css))"/g)) {
       const url = new URL(asset, origin + path);
       if (url.origin === origin) assets.add(url.pathname);
