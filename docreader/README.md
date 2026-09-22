@@ -8,7 +8,7 @@ DocReader 是 WeKnora 项目中负责文档解析和处理的 gRPC 服务。它�
 
 ```yaml
 docreader:
-  image: wechatopenai/weknora-docreader:${WEKNORA_VERSION:-latest}
+  image: hiai/hiai-docreader:${WEKNORA_VERSION:-latest}
   environment:
     - MINIO_ENDPOINT=minio:9000
     - MINIO_PUBLIC_ENDPOINT=http://localhost:${MINIO_PORT:-9000}
@@ -218,12 +218,12 @@ healthcheck:
 
 ```bash
 docker ps | grep docreader
-docker logs WeKnora-docreader
+docker logs HiAI-docreader
 ```
 
 ## 更多信息
 
 - 服务端口：50051（gRPC）
-- 容器名称：WeKnora-docreader
-- 网络：WeKnora-network
+- 容器名称：HiAI-docreader
+- 网络：HiAI-network
 - 重启策略：unless-stopped

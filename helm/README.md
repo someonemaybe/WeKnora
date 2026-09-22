@@ -166,7 +166,7 @@ helm install weknora ./helm \
 |-----------|-------------|---------|
 | `app.enabled` | Enable backend | `true` |
 | `app.replicaCount` | Number of replicas | `1` |
-| `app.image.repository` | Image repository | `wechatopenai/weknora-app` |
+| `app.image.repository` | Image repository | `hiai/hiai-app` |
 | `app.image.tag` | Image tag | `""` (uses appVersion) |
 | `app.resources` | Resource limits | See values.yaml |
 | `app.env` | Environment variables | See values.yaml |
@@ -178,7 +178,7 @@ helm install weknora ./helm \
 |-----------|-------------|---------|
 | `frontend.enabled` | Enable frontend | `true` |
 | `frontend.replicaCount` | Number of replicas | `1` |
-| `frontend.image.repository` | Image repository | `wechatopenai/weknora-ui` |
+| `frontend.image.repository` | Image repository | `hiai/hiai-ui` |
 | `frontend.image.tag` | Image tag | `latest` |
 
 ### PostgreSQL (ParadeDB)

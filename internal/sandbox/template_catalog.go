@@ -153,8 +153,8 @@ func imageTag(image string) string {
 }
 
 // normalizeImageRepository reduces an image reference to its repository path so
-// that "docker.io/wechatopenai/weknora-sandbox:latest",
-// "wechatopenai/weknora-sandbox@sha256:…" and the bare name all compare equal.
+// that "docker.io/hiai/hiai-sandbox:latest",
+// "hiai/hiai-sandbox@sha256:…" and the bare name all compare equal.
 func normalizeImageRepository(image string) string {
 	ref := strings.TrimSpace(image)
 	if ref == "" {

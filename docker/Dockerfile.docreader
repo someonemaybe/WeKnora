@@ -65,7 +65,18 @@ RUN if [ -z "$TARGETARCH" ]; then \
 
 # 复制依赖文件
 COPY docreader/pyproject.toml docreader/uv.lock ./
-RUN pip install uv --break-system-packages && \
+# Optional PyPI mirror for installing the uv tool itself (e.g.
+# https://pypi.tuna.tsinghua.edu.cn/simple). Do not point UV_INDEX_URL at a
+# mirror here: uv.lock is pinned to https://pypi.org/simple and --locked
+# will fail if the default index changes.
+ARG PIP_INDEX_URL=""
+ENV PIP_DEFAULT_TIMEOUT=120
+ENV UV_HTTP_TIMEOUT=300
+RUN if [ -n "$PIP_INDEX_URL" ]; then \
+      pip install uv --break-system-packages -i "$PIP_INDEX_URL"; \
+    else \
+      pip install uv --break-system-packages; \
+    fi && \
     python -m uv sync --locked --no-dev
 
 # 复制源代码和生成脚本

@@ -144,7 +144,7 @@ Shell 的补齐能力：
 3. 由 `user` 可写、可进入的 `/workspace`；标准镜像预建 input、output。
 4. 安装流程维护的只读技能目录；普通会话不能修改它。
 
-当前 `docker/Dockerfile.sandbox` 已满足账号和工作区所有权要求。本次现场检查发现，本机缓存的 `wechatopenai/weknora-sandbox:main` 仍只有名为 `sandbox` 的 UID 1000 账号，`/workspace` 由 root 所有。这类旧镜像不能靠换工具解决，必须使用当前 Dockerfile 重建镜像，并更新所用模板/镜像及后续会话。
+当前 `docker/Dockerfile.sandbox` 已满足账号和工作区所有权要求。本次现场检查发现，本机缓存的 `hiai/hiai-sandbox:main` 仍只有名为 `sandbox` 的 UID 1000 账号，`/workspace` 由 root 所有。这类旧镜像不能靠换工具解决，必须使用当前 Dockerfile 重建镜像，并更新所用模板/镜像及后续会话。
 
 不要在运行时自动提权、递归 chown、移动目录或删除链接来兼容旧镜像。已有会话中的错误所有权、目录链接会明确报错并保留数据；必要的恢复应由管理员检查具体路径后执行。切换到新模板前，应先保存所需附件和产物。
 

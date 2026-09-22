@@ -162,7 +162,7 @@ func TestCubeRemoteClientListTemplatesSurfacesLastError(t *testing.T) {
 			"templateID": "tpl-broken",
 			"status":     "FAILED",
 			"imageInfo":  DefaultDockerImage,
-			"lastError":  "pull access denied for wechatopenai/weknora-sandbox",
+			"lastError":  "pull access denied for hiai/hiai-sandbox",
 		}},
 		nil,
 	))
@@ -170,7 +170,7 @@ func TestCubeRemoteClientListTemplatesSurfacesLastError(t *testing.T) {
 	templates, err := client.ListTemplates(context.Background())
 	require.NoError(t, err)
 	require.Len(t, templates, 1)
-	require.Equal(t, "pull access denied for wechatopenai/weknora-sandbox", templates[0].Error)
+	require.Equal(t, "pull access denied for hiai/hiai-sandbox", templates[0].Error)
 }
 
 // Cube stores snapshots in the template store. The settings step is for
@@ -586,18 +586,18 @@ func TestCubeTemplateImageIsRecognisedAsStandard(t *testing.T) {
 func TestIsStandardTemplateImage(t *testing.T) {
 	for _, image := range []string{
 		DefaultDockerImage,
-		"wechatopenai/weknora-sandbox",
-		"docker.io/wechatopenai/weknora-sandbox:latest",
-		"docker.io/wechatopenai/weknora-sandbox@sha256:abc",
-		"registry.internal:5000/wechatopenai/weknora-sandbox:v1",
+		"hiai/hiai-sandbox",
+		"docker.io/hiai/hiai-sandbox:latest",
+		"docker.io/hiai/hiai-sandbox@sha256:abc",
+		"registry.internal:5000/hiai/hiai-sandbox:v1",
 	} {
 		require.True(t, isStandardTemplateImage(image), image)
 	}
 	for _, image := range []string{
 		"",
 		"python:3.11",
-		"wechatopenai/weknora-docreader:latest",
-		"someone-else/weknora-sandbox:latest",
+		"hiai/hiai-docreader:latest",
+		"someone-else/hiai-sandbox:latest",
 	} {
 		require.False(t, isStandardTemplateImage(image), image)
 	}

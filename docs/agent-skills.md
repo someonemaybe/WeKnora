@@ -406,13 +406,13 @@ Docker 后端为每个会话提供独立容器，当前隔离和资源配置如�
 
 #### 沙箱镜像
 
-系统使用专用的沙箱镜像 `wechatopenai/weknora-sandbox`，预装了 Python 3.12、Node.js 20、uv 和常用 CLI 工具；技能依赖在技能安装阶段写入各自环境。3.12 才能解析技能源码里带嵌套引号的 f-string（PEP 701）；安装校验用的就是镜像里的解释器。
+系统使用专用的沙箱镜像 `hiai/hiai-sandbox`，预装了 Python 3.12、Node.js 20、uv 和常用 CLI 工具；技能依赖在技能安装阶段写入各自环境。3.12 才能解析技能源码里带嵌套引号的 f-string（PEP 701）；安装校验用的就是镜像里的解释器。
 
 **预拉取镜像**（推荐在首次部署时执行，避免首次执行脚本时等待下载）：
 
 ```bash
 # 方式一：直接拉取
-docker pull wechatopenai/weknora-sandbox:main
+docker pull hiai/hiai-sandbox:main
 
 # 方式二：本地构建
 sh scripts/build_images.sh -s
@@ -437,7 +437,7 @@ docker run --rm \
   --network=none \
   -v /path/to/skill:/skill:ro \
   -w /skill \
-  wechatopenai/weknora-sandbox:main \
+  hiai/hiai-sandbox:main \
   python scripts/analyze.py input.pdf
 ```
 

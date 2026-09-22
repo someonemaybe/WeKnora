@@ -77,7 +77,7 @@ make dev-restart  # 重启
 | `dex` | `dexidp/dex:latest`（OIDC 测试身份源，配置 `misc/dex-config.yaml`） | `5556` | `--dex` / `--full` |
 | `langfuse-web` / `langfuse-worker` / `langfuse-clickhouse` / `langfuse-minio` / `langfuse-db-init` | Langfuse v3 自建栈，复用 dev 的 postgres（独立 `langfuse` 库）与 redis（DB 1） | web `3000`、minio `9100/9101` | `--langfuse`（`dev.sh` 默认开启，`--no-langfuse` 关闭） |
 | `odl-hybrid` | 本地构建 `docker/Dockerfile.odl-hybrid`（Docling PDF 后端） | `5002` | `--odl-hybrid`（镜像较大，按需） |
-| `sandbox` | `wechatopenai/weknora-sandbox`（Skills 脚本执行沙箱，仅 build/pull，非常驻） | - | profile `full` |
+| `sandbox` | `hiai/hiai-sandbox`（Skills 脚本执行沙箱，仅 build/pull，非常驻） | - | profile `full` |
 
 `dev.sh start` 的可选参数：`--minio`、`--qdrant`、`--neo4j`、`--dex`、`--langfuse`（默认开）、`--no-langfuse`、`--odl-hybrid`、`--full`（全部可选服务，不含 odl-hybrid）。通过 Makefile 传参：`make dev-start DEV_ARGS=--odl-hybrid`。
 
@@ -127,9 +127,9 @@ make package-mac-app  # 打 macOS .app（scripts/package-mac-app.sh）
 
 | 目标 | 作用 |
 | --- | --- |
-| `docker-build-app` | 构建 `wechatopenai/weknora-app`（`docker/Dockerfile.app`，注入 `scripts/get_version.sh` 的版本信息） |
-| `docker-build-docreader` | 构建 `wechatopenai/weknora-docreader`（`docker/Dockerfile.docreader`） |
-| `docker-build-frontend` | 多阶段构建 `wechatopenai/weknora-ui`（builder 内 `npm ci` + `npm run build`，无需宿主机预构建 dist） |
+| `docker-build-app` | 构建 `hiai/hiai-app`（`docker/Dockerfile.app`，注入 `scripts/get_version.sh` 的版本信息） |
+| `docker-build-docreader` | 构建 `hiai/hiai-docreader`（`docker/Dockerfile.docreader`） |
+| `docker-build-frontend` | 多阶段构建 `hiai/hiai-ui`（builder 内 `npm ci` + `npm run build`，无需宿主机预构建 dist） |
 | `docker-build-all` | 以上三个镜像 |
 | `docker-run` | 确保 `.env` 存在（缺失时从 `.env.example` 复制或 touch）后 `docker-compose up` |
 | `docker-stop` / `docker-restart` | `docker-compose down` / `stop -t 60` + `up` |

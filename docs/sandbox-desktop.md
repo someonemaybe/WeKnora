@@ -28,8 +28,8 @@ Docker 后端目前**没有**桌面路径；只有 CubeSandbox / E2B 的桌面�
 
 | 变体 | 标签 | 用途 |
 | --- | --- | --- |
-| `desktop` | `wechatopenai/weknora-sandbox:<版本>-desktop` | E2B 桌面模板的基础镜像 |
-| `desktop-cube` | `wechatopenai/weknora-sandbox:<版本>-desktop-cube` | Cube 桌面模板（amd64，带 envd） |
+| `desktop` | `hiai/hiai-sandbox:<版本>-desktop` | E2B 桌面模板的基础镜像 |
+| `desktop-cube` | `hiai/hiai-sandbox:<版本>-desktop-cube` | Cube 桌面模板（amd64，带 envd） |
 
 E2B 桌面模板构建为 4 CPU / 4 GB；Cube 桌面模板的可写层是 8G（标准 CLI 模板是 1G）。不要把 Python 运行时或 `/workspace` 权限改成「桌面专用」——那会连带改掉所有沙箱镜像。
 

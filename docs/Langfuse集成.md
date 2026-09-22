@@ -56,8 +56,8 @@ docker compose logs -f app | grep Langfuse
 
 | 组件 | 来源 | 备注 |
 | --- | --- | --- |
-| PostgreSQL | 复用 `WeKnora-postgres` | 通过一次性的 `langfuse-db-init` 容器，在同一 pg 实例里创建独立的 `langfuse` 数据库。库级隔离，互不影响。 |
-| Redis | 复用 `WeKnora-redis` | 使用独立的 Redis DB 号（默认 DB 1，WeKnora 用 DB 0）。`REDIS_CONNECTION_STRING` 指定 DB 后缀。 |
+| PostgreSQL | 复用 `HiAI-postgres` | 通过一次性的 `langfuse-db-init` 容器，在同一 pg 实例里创建独立的 `langfuse` 数据库。库级隔离，互不影响。 |
+| Redis | 复用 `HiAI-redis` | 使用独立的 Redis DB 号（默认 DB 1，WeKnora 用 DB 0）。`REDIS_CONNECTION_STRING` 指定 DB 后缀。 |
 | ClickHouse | 新增 `langfuse-clickhouse` | Langfuse 专有（OLAP 事件存储），WeKnora 不用，必须独立。 |
 | MinIO | 新增 `langfuse-minio` | 故意和 WeKnora 的 `minio` 分开（后者是可选 profile，未必激活；Langfuse S3 要专属 bucket）。 |
 | Web / Worker | 新增 `langfuse-web` + `langfuse-worker` | Langfuse 应用本体。 |
@@ -105,8 +105,8 @@ docker compose up -d app
 | langfuse-worker | 常驻 | 200–400 MB | Node.js，Queue consumer |
 | langfuse-clickhouse | 常驻 | 500 MB–1 GB | 首次迁移稍高，稳态约 500 MB |
 | langfuse-minio | 常驻 | 100–200 MB | |
-| （复用）WeKnora-postgres | – | +~50 MB | 多一个 `langfuse` 数据库 |
-| （复用）WeKnora-redis | – | +30–80 MB | 共用实例的 DB 1 |
+| （复用）HiAI-postgres | – | +~50 MB | 多一个 `langfuse` 数据库 |
+| （复用）HiAI-redis | – | +30–80 MB | 共用实例的 DB 1 |
 | **新增合计** | | **≈ 1.0–1.5 GB** | 推荐 3 GB+ 可用内存 |
 
 > 和"完全隔离各建一套 pg/redis"方案相比，这里节省了约 **400–500 MB** 内存。代价是 WeKnora 的 pg/redis 容量规划需要为 Langfuse 预留一点余量；Langfuse 写入量并不大（只是元数据 + 任务队列，事件主体走 ClickHouse），实际影响很小。
@@ -115,7 +115,7 @@ docker compose up -d app
 
 ##### 生产环境下的注意事项
 
-- **WeKnora-redis 的驱逐策略**：Langfuse 建议 `maxmemory-policy noeviction`（避免 Redis 在内存紧张时丢弃队列任务）。如果 WeKnora 的 redis 未配置该策略，建议在 `docker-compose.yml` 的 redis command 中加上 `--maxmemory-policy noeviction`。
+- **HiAI-redis 的驱逐策略**：Langfuse 建议 `maxmemory-policy noeviction`（避免 Redis 在内存紧张时丢弃队列任务）。如果 WeKnora 的 redis 未配置该策略，建议在 `docker-compose.yml` 的 redis command 中加上 `--maxmemory-policy noeviction`。
 - **备份**：`pg_dump -d langfuse` 可独立备份 Langfuse 的元数据；事件数据在 ClickHouse 卷（`langfuse_clickhouse_data`）中。
 - **想彻底隔离**（跨机部署、强运维隔离）：可以直接把 `langfuse-web` / `langfuse-worker` 的 `DATABASE_URL` 和 `REDIS_CONNECTION_STRING` 指向任意外部 pg/redis（例如 RDS + ElastiCache）；`langfuse-db-init` 容器可以选择不启动，手动在目标 pg 上 `CREATE DATABASE langfuse` 即可。
 
@@ -196,7 +196,7 @@ export LANGFUSE_SECRET_KEY=sk-lf-xxxxxxxx
 go run ./cmd/server
 ```
 
-Dev 相关容器都带 `-dev` 后缀、用独立网络 `WeKnora-network-dev`，和生产 compose **不冲突**。
+Dev 相关容器都带 `-dev` 后缀、用独立网络 `HiAI-network-dev`，和生产 compose **不冲突**。
 
 ### 2.3 验证
 

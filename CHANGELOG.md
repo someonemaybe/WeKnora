@@ -71,7 +71,7 @@ All notable changes to this project will be documented in this file.
 - **BUILD**: Migrations `000080`–`000090` (auto-tag, message artifacts, tenant/session sandbox config, memory, message usage, tenant skills, install transcript, snapshot planned name, env vars, skill catalog); matching SQLite migrations `000003`–`000012`.
 - **BUILD**: New `internal/sandbox` remote-client stack (Docker Engine API, E2B, Cube), `internal/agent/compaction`, `internal/application/service/memory`, `internal/ipclass` (shared SSRF + sandbox URL classification), `third_party/anydoc-go`.
 - **BUILD**: Go client: sandbox skill install/stop/files, personal env-var APIs, long-term memory APIs.
-- **BUILD**: `wechatopenai/weknora-sandbox` image; Docker backend requires `appuser` in the `docker.sock` group inside the app container.
+- **BUILD**: `hiai/hiai-sandbox` image; Docker backend requires `appuser` in the `docker.sock` group inside the app container.
 - **BUILD**: golangci-lint, anydoc, and dsh-plugin GitHub Actions workflows.
 
 ### Documentation

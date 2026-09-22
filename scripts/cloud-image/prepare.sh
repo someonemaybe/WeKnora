@@ -23,7 +23,7 @@
 #   PRUNE_OLD_IMAGES         升级场景下是否清理 dangling / 旧版本 tag 镜像,
 #                            默认 false。设为 true 时在拉新镜像之后执行
 #                            `docker image prune -af`, 把没有容器引用的镜像
-#                            (含旧 WEKNORA_VERSION 的 wechatopenai/weknora-*)
+#                            (含旧 WEKNORA_VERSION 的 hiai/hiai-*)
 #                            一次性删掉, 减少要打进云镜像的体积。
 set -euo pipefail
 
@@ -160,7 +160,7 @@ sed -i 's/^GIN_MODE=.*/GIN_MODE=release/' .env || true
 
 # 把 WEKNORA_VERSION 与 WEKNORA_REF 对齐, 让 docker compose 拉取与 ref 一致的
 # 镜像 tag。无条件覆盖, 避免 .env 残留上一次 prepare 留下的旧版本号。
-# Docker Hub 上 wechatopenai/weknora-* 的 tag 命名约定：
+# Docker Hub 上 hiai/hiai-* 的 tag 命名约定：
 #   - 浮动 tag：main（持续指向最新构建）
 #   - 固定 release tag：v 前缀 + semver（如 v0.7.2、v0.5.2）
 # 因此这里不剥 v、也不映射到 latest。
@@ -185,19 +185,19 @@ docker compose --profile full pull sandbox || true
 # 不预拉, 体积可省 5-15GB. 用户如需启用:
 #   cd /opt/WeKnora && docker compose --profile <name> up -d
 
-# 升级场景: 清理旧版本 tag 的 wechatopenai/weknora-* 镜像。
+# 升级场景: 清理旧版本 tag 的 hiai/hiai-* 镜像。
 # 默认关闭, 保留回滚路径; 制作镜像前显式打开以减小体积。
 #
 # 注意: 不用 `docker image prune -af`!
 # sandbox 镜像在 compose 里只 pull 不 up (Agent Skills 由 app 按需 docker run),
 # 没有任何容器引用它, 一旦 `prune -a` 会把当前版本的 sandbox 一起删掉,
 # 反而违背 prepare.sh 4.5 步预拉 sandbox 的目的。
-# 这里精确按 tag 比对, 只删 wechatopenai/weknora-* 仓库下、tag 不等于当前
+# 这里精确按 tag 比对, 只删 hiai/hiai-* 仓库下、tag 不等于当前
 # WEKNORA_VERSION 的镜像, 基础设施镜像 (paradedb / redis) 不动。
 if [[ "${PRUNE_OLD_IMAGES,,}" == "true" || "${PRUNE_OLD_IMAGES}" == "1" ]]; then
-  echo "[prepare] 4.6/6 清理 wechatopenai/weknora-* 仓库下旧版本镜像 (PRUNE_OLD_IMAGES=true, keep=${WEKNORA_VERSION_VAL})"
+  echo "[prepare] 4.6/6 清理 hiai/hiai-* 仓库下旧版本镜像 (PRUNE_OLD_IMAGES=true, keep=${WEKNORA_VERSION_VAL})"
   docker image ls --format '{{.Repository}}:{{.Tag}}' \
-    | grep -E '^wechatopenai/weknora-' \
+    | grep -E '^hiai/hiai-' \
     | grep -vE ":${WEKNORA_VERSION_VAL}\$" \
     | xargs -r docker rmi -f 2>/dev/null || true
 fi

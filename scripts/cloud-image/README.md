@@ -41,7 +41,7 @@ scripts/cloud-image/
 
 ## 不需要 clone 整个 WeKnora 仓库
 
-WeKnora 所有容器都从 Docker Hub 拉镜像（`wechatopenai/weknora-*`），Go / Python / 前端源码都不需要带到宿主机。
+WeKnora 所有容器都从 Docker Hub 拉镜像（`hiai/hiai-*`），Go / Python / 前端源码都不需要带到宿主机。
 
 `docker-compose.yml` 实际从宿主机挂载到容器的只有：
 
@@ -180,7 +180,7 @@ sudo \
 > 三个变量分别解决三个不同的境外 CDN 不可达问题:
 > - `WEKNORA_GH_PROXY`：加速 **GitHub tarball** 下载（`prepare.sh` 步骤 2，运行时文件）
 > - `DOCKER_INSTALL_MIRROR`：绕开 **`get.docker.com`**，改用 apt + docker-ce 镜像源装 Docker（步骤 1）
-> - `DOCKER_REGISTRY_MIRROR`：加速 **Docker Hub** 镜像拉取（步骤 4，`wechatopenai/weknora-*`）
+> - `DOCKER_REGISTRY_MIRROR`：加速 **Docker Hub** 镜像拉取（步骤 4，`hiai/hiai-*`）
 >
 > 不同云厂商对应地址（按需替换 ubuntu/debian 部分以匹配实际发行版）:
 > | 厂商 | `DOCKER_INSTALL_MIRROR` | `DOCKER_REGISTRY_MIRROR` |

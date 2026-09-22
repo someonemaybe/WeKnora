@@ -119,9 +119,9 @@ const FAQ_SAMPLE = `# ZS-HiAI 部署与使用 FAQ
 官方镜像通过 daocloud 加速分发：
 
 \`\`\`
-docker pull docker.m.daocloud.io/wechatopenai/weknora-app:v0.5.0
-docker pull docker.m.daocloud.io/wechatopenai/weknora-docreader:v0.5.0
-docker pull docker.m.daocloud.io/wechatopenai/weknora-ui:v0.5.0
+docker pull docker.m.daocloud.io/hiai/hiai-app:v0.5.0
+docker pull docker.m.daocloud.io/hiai/hiai-docreader:v0.5.0
+docker pull docker.m.daocloud.io/hiai/hiai-ui:v0.5.0
 \`\`\`
 
 ### Q2: 启动后访问 5173 显示旧界面？

@@ -32,7 +32,23 @@ output_dir="$(cd "$output_dir" && pwd)"
 build_dir="$(mktemp -d /tmp/weknora-bsk-build.XXXXXX)"
 trap 'rm -rf "$build_dir"' EXIT
 
-git clone --no-checkout https://github.com/Tencent/BrowserSkill.git "$build_dir/source"
+clone_url="${BROWSERSKILL_GIT_URL:-https://github.com/Tencent/BrowserSkill.git}"
+# Unstable GitHub/proxy links often fail on HTTP/2 mid-pack. Force HTTP/1.1 and retry.
+git_clone() {
+  git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 \
+    clone --filter=blob:none --no-checkout "$clone_url" "$build_dir/source"
+}
+cloned=0
+for attempt in 1 2 3 4 5; do
+  rm -rf "$build_dir/source"
+  if git_clone; then
+    cloned=1
+    break
+  fi
+  echo "BrowserSkill git clone failed (attempt $attempt/5), retrying..." >&2
+  sleep $((attempt * 5))
+done
+[ "$cloned" = 1 ] || { echo "error: failed to clone $clone_url" >&2; exit 1; }
 git -C "$build_dir/source" checkout --detach "$source_commit"
 for patch in "$repo_root"/patches/browserskill/*.patch; do
   git -C "$build_dir/source" apply --check "$patch"

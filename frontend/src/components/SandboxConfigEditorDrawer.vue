@@ -814,7 +814,7 @@ const isMaskedSecret = (value?: string) => value === secretPlaceholder
 // Mirrors DefaultDockerImage on the server, including why it tracks main
 // instead of latest: the latest tag still carries an image whose /workspace
 // the sandbox account cannot write.
-const defaultDockerImage = 'wechatopenai/weknora-sandbox:main'
+const defaultDockerImage = 'hiai/hiai-sandbox:main'
 
 const clusterGuideUrl = 'https://github.com/Tencent/WeKnora/blob/main/docs/sandbox-cluster.md'
 const e2bApiKeysUrl = 'https://e2b.dev/dashboard?tab=keys'

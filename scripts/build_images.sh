@@ -129,7 +129,7 @@ get_version_info() {
 
 # 构建应用镜像
 build_app_image() {
-    log_info "构建应用镜像 (weknora-app)..."
+    log_info "构建应用镜像 (hiai-app)..."
     
     cd "$PROJECT_ROOT"
     
@@ -146,8 +146,13 @@ build_app_image() {
         --build-arg BUILD_TIME_ARG="$BUILD_TIME" \
         --build-arg GO_VERSION_ARG="$GO_VERSION" \
         --build-arg WITH_ANYDOC=${WITH_ANYDOC:-1} \
+        --build-arg APK_MIRROR_ARG=${APK_MIRROR_ARG:-} \
+        --build-arg RUSTUP_DIST_SERVER=${RUSTUP_DIST_SERVER:-} \
+        --build-arg RUSTUP_UPDATE_ROOT=${RUSTUP_UPDATE_ROOT:-} \
+        --build-arg CARGO_MIRROR=${CARGO_MIRROR:-} \
+        --build-arg BROWSERSKILL_GIT_URL=${BROWSERSKILL_GIT_URL:-} \
         -f docker/Dockerfile.app \
-        -t wechatopenai/weknora-app:latest \
+        -t hiai/hiai-app:latest \
         .
     
     if [ $? -eq 0 ]; then
@@ -161,7 +166,7 @@ build_app_image() {
 
 # 构建文档读取器镜像
 build_docreader_image() {
-    log_info "构建文档读取器镜像 (weknora-docreader)..."
+    log_info "构建文档读取器镜像 (hiai-docreader)..."
     
     cd "$PROJECT_ROOT"
     
@@ -170,8 +175,9 @@ build_docreader_image() {
         --build-arg PLATFORM=$PLATFORM \
         --build-arg TARGETARCH=$TARGETARCH \
         --build-arg APT_MIRROR=${APT_MIRROR:-} \
+        --build-arg PIP_INDEX_URL=${PIP_INDEX_URL:-} \
         -f docker/Dockerfile.docreader \
-        -t wechatopenai/weknora-docreader:latest \
+        -t hiai/hiai-docreader:latest \
         .
     
     if [ $? -eq 0 ]; then
@@ -185,7 +191,7 @@ build_docreader_image() {
 
 # 构建前端镜像（多阶段：npm 在 builder 内执行，无需宿主机预构建 dist）
 build_frontend_image() {
-    log_info "构建前端镜像 (weknora-ui)..."
+    log_info "构建前端镜像 (hiai-ui)..."
     
     cd "$PROJECT_ROOT"
     
@@ -198,7 +204,7 @@ build_frontend_image() {
         ${NPM_REGISTRY:+--build-arg NPM_REGISTRY="$NPM_REGISTRY"} \
         ${NODE_MAX_OLD_SPACE_SIZE:+--build-arg NODE_MAX_OLD_SPACE_SIZE="$NODE_MAX_OLD_SPACE_SIZE"} \
         -f frontend/Dockerfile \
-        -t wechatopenai/weknora-ui:latest \
+        -t hiai/hiai-ui:latest \
         frontend/
     
     if [ $? -eq 0 ]; then
@@ -212,7 +218,7 @@ build_frontend_image() {
 
 # 构建沙箱镜像
 build_sandbox_image() {
-    log_info "构建沙箱镜像 (weknora-sandbox)..."
+    log_info "构建沙箱镜像 (hiai-sandbox)..."
 
     cd "$PROJECT_ROOT"
 
@@ -223,8 +229,8 @@ build_sandbox_image() {
         --build-arg TARGETPLATFORM=$PLATFORM \
         -f docker/Dockerfile.sandbox \
         --target sandbox \
-        -t wechatopenai/weknora-sandbox:latest \
-        -t wechatopenai/weknora-sandbox:main \
+        -t hiai/hiai-sandbox:latest \
+        -t hiai/hiai-sandbox:main \
         .
 
     if [ $? -ne 0 ]; then
@@ -235,7 +241,7 @@ build_sandbox_image() {
     # Cube 从镜像直接构建模板，并以 :49983/health 探活，缺 envd 必然失败，
     # 因此 Cube 用的是注入了 envd 的变体镜像。详见 docs/sandbox-cluster.md。
     # 固定 linux/amd64：envd 的来源镜像 cubesandbox-base 不发布 arm64。
-    log_info "构建沙箱镜像 Cube 变体 (weknora-sandbox:main-cube)..."
+    log_info "构建沙箱镜像 Cube 变体 (hiai-sandbox:main-cube)..."
 
     docker build \
         --platform linux/amd64 \
@@ -243,8 +249,8 @@ build_sandbox_image() {
         --build-arg TARGETARCH=amd64 \
         -f docker/Dockerfile.sandbox \
         --target cube \
-        -t wechatopenai/weknora-sandbox:latest-cube \
-        -t wechatopenai/weknora-sandbox:main-cube \
+        -t hiai/hiai-sandbox:latest-cube \
+        -t hiai/hiai-sandbox:main-cube \
         .
 
     if [ $? -ne 0 ]; then
@@ -254,15 +260,15 @@ build_sandbox_image() {
 
     # Desktop variant: XFCE + x11vnc + websockify. Tagged for E2B template
     # builds; the Docker backend does not consume this image yet.
-    log_info "构建沙箱镜像桌面变体 (weknora-sandbox:main-desktop)..."
+    log_info "构建沙箱镜像桌面变体 (hiai-sandbox:main-desktop)..."
 
     docker build \
         --platform $PLATFORM \
         --build-arg TARGETPLATFORM=$PLATFORM \
         -f docker/Dockerfile.sandbox \
         --target desktop \
-        -t wechatopenai/weknora-sandbox:latest-desktop \
-        -t wechatopenai/weknora-sandbox:main-desktop \
+        -t hiai/hiai-sandbox:latest-desktop \
+        -t hiai/hiai-sandbox:main-desktop \
         .
 
     if [ $? -ne 0 ]; then
@@ -270,7 +276,7 @@ build_sandbox_image() {
         return 1
     fi
 
-    log_info "构建沙箱镜像桌面 Cube 变体 (weknora-sandbox:main-desktop-cube)..."
+    log_info "构建沙箱镜像桌面 Cube 变体 (hiai-sandbox:main-desktop-cube)..."
 
     docker build \
         --platform linux/amd64 \
@@ -278,8 +284,8 @@ build_sandbox_image() {
         --build-arg TARGETARCH=amd64 \
         -f docker/Dockerfile.sandbox \
         --target desktop-cube \
-        -t wechatopenai/weknora-sandbox:latest-desktop-cube \
-        -t wechatopenai/weknora-sandbox:main-desktop-cube \
+        -t hiai/hiai-sandbox:latest-desktop-cube \
+        -t hiai/hiai-sandbox:main-desktop-cube \
         .
 
     if [ $? -eq 0 ]; then
@@ -358,29 +364,29 @@ clean_images() {
     
     # 停止相关容器
     log_info "停止相关容器..."
-    docker stop $(docker ps -q --filter "ancestor=wechatopenai/weknora-app:latest" 2>/dev/null) 2>/dev/null || true
-    docker stop $(docker ps -q --filter "ancestor=wechatopenai/weknora-docreader:latest" 2>/dev/null) 2>/dev/null || true
-    docker stop $(docker ps -q --filter "ancestor=wechatopenai/weknora-ui:latest" 2>/dev/null) 2>/dev/null || true
+    docker stop $(docker ps -q --filter "ancestor=hiai/hiai-app:latest" 2>/dev/null) 2>/dev/null || true
+    docker stop $(docker ps -q --filter "ancestor=hiai/hiai-docreader:latest" 2>/dev/null) 2>/dev/null || true
+    docker stop $(docker ps -q --filter "ancestor=hiai/hiai-ui:latest" 2>/dev/null) 2>/dev/null || true
     
     # 删除相关容器
     log_info "删除相关容器..."
-    docker rm $(docker ps -aq --filter "ancestor=wechatopenai/weknora-app:latest" 2>/dev/null) 2>/dev/null || true
-    docker rm $(docker ps -aq --filter "ancestor=wechatopenai/weknora-docreader:latest" 2>/dev/null) 2>/dev/null || true
-    docker rm $(docker ps -aq --filter "ancestor=wechatopenai/weknora-ui:latest" 2>/dev/null) 2>/dev/null || true
+    docker rm $(docker ps -aq --filter "ancestor=hiai/hiai-app:latest" 2>/dev/null) 2>/dev/null || true
+    docker rm $(docker ps -aq --filter "ancestor=hiai/hiai-docreader:latest" 2>/dev/null) 2>/dev/null || true
+    docker rm $(docker ps -aq --filter "ancestor=hiai/hiai-ui:latest" 2>/dev/null) 2>/dev/null || true
     
     # 删除镜像
     log_info "删除本地镜像..."
-    docker rmi wechatopenai/weknora-app:latest 2>/dev/null || true
-    docker rmi wechatopenai/weknora-docreader:latest 2>/dev/null || true
-    docker rmi wechatopenai/weknora-ui:latest 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:latest 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:latest-cube 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:latest-desktop 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:latest-desktop-cube 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:main 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:main-cube 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:main-desktop 2>/dev/null || true
-    docker rmi wechatopenai/weknora-sandbox:main-desktop-cube 2>/dev/null || true
+    docker rmi hiai/hiai-app:latest 2>/dev/null || true
+    docker rmi hiai/hiai-docreader:latest 2>/dev/null || true
+    docker rmi hiai/hiai-ui:latest 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:latest 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:latest-cube 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:latest-desktop 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:latest-desktop-cube 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:main 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:main-cube 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:main-desktop 2>/dev/null || true
+    docker rmi hiai/hiai-sandbox:main-desktop-cube 2>/dev/null || true
     
     docker image prune -f
     

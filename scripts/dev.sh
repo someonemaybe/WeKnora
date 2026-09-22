@@ -172,7 +172,7 @@ _wait_odl_hybrid_ready() {
         sleep "$interval"
         waited=$((waited + interval))
     done
-    log_warning "odl-hybrid 在 ${max_wait}s 内未就绪，请查看: docker logs WeKnora-odl-hybrid"
+    log_warning "odl-hybrid 在 ${max_wait}s 内未就绪，请查看: docker logs HiAI-odl-hybrid"
     return 1
 }
 

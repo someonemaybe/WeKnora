@@ -6,11 +6,30 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 ENV RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/usr/local/cargo
 ENV PATH=/usr/local/cargo/bin:$PATH
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain stable
+ENV CARGO_HTTP_TIMEOUT=300
+ARG RUSTUP_DIST_SERVER=""
+ARG RUSTUP_UPDATE_ROOT=""
+ARG CARGO_MIRROR=""
+RUN set -eux; \
+    if [ -n "$CARGO_MIRROR" ]; then \
+      mkdir -p /usr/local/cargo; \
+      printf '[source.crates-io]\nreplace-with = "mirror"\n[source.mirror]\nregistry = "%s"\n' "$CARGO_MIRROR" \
+        > /usr/local/cargo/config.toml; \
+    fi; \
+    if [ -n "$RUSTUP_DIST_SERVER" ]; then export RUSTUP_DIST_SERVER="$RUSTUP_DIST_SERVER"; fi; \
+    if [ -n "$RUSTUP_UPDATE_ROOT" ]; then export RUSTUP_UPDATE_ROOT="$RUSTUP_UPDATE_ROOT"; fi; \
+    if [ -n "$RUSTUP_UPDATE_ROOT" ]; then \
+      rustup_url="$(dirname "$RUSTUP_UPDATE_ROOT")/rustup-init.sh"; \
+    else \
+      rustup_url="https://sh.rustup.rs"; \
+    fi; \
+    curl --proto '=https' --tlsv1.2 -sSf "$rustup_url" | sh -s -- -y --profile minimal --default-toolchain stable
 COPY scripts/build_browserskill.sh scripts/browserskill-release.json ./scripts/
 COPY patches/browserskill ./patches/browserskill
 ARG TARGETOS
 ARG TARGETARCH
+ARG BROWSERSKILL_GIT_URL=""
+ENV BROWSERSKILL_GIT_URL=${BROWSERSKILL_GIT_URL}
 RUN bash scripts/build_browserskill.sh /opt/weknora/browserskill "${TARGETOS}/${TARGETARCH}"
 
 # Build stage
@@ -66,12 +85,30 @@ ENV GO_VERSION=${GO_VERSION_ARG}
 # engine; pass WITH_ANYDOC=0 to skip the Rust toolchain (~few minutes and
 # ~1 GB of build-stage layers).
 ARG WITH_ANYDOC=1
+ARG RUSTUP_DIST_SERVER=""
+ARG RUSTUP_UPDATE_ROOT=""
+ARG CARGO_MIRROR=""
 ENV RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/usr/local/cargo
 ENV PATH=/usr/local/cargo/bin:$PATH
+ENV CARGO_HTTP_TIMEOUT=300
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git \
+    --mount=type=cache,target=/usr/local/rustup \
+    set -eux; \
+    if [ -n "$CARGO_MIRROR" ]; then \
+      mkdir -p /usr/local/cargo; \
+      printf '[source.crates-io]\nreplace-with = "mirror"\n[source.mirror]\nregistry = "%s"\n' "$CARGO_MIRROR" \
+        > /usr/local/cargo/config.toml; \
+    fi; \
     if [ "$WITH_ANYDOC" = "1" ]; then \
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+        if [ -n "$RUSTUP_DIST_SERVER" ]; then export RUSTUP_DIST_SERVER="$RUSTUP_DIST_SERVER"; fi; \
+        if [ -n "$RUSTUP_UPDATE_ROOT" ]; then export RUSTUP_UPDATE_ROOT="$RUSTUP_UPDATE_ROOT"; fi; \
+        if [ -n "$RUSTUP_UPDATE_ROOT" ]; then \
+          rustup_url="$(dirname "$RUSTUP_UPDATE_ROOT")/rustup-init.sh"; \
+        else \
+          rustup_url="https://sh.rustup.rs"; \
+        fi; \
+        curl --proto '=https' --tlsv1.2 -sSf "$rustup_url" \
             | sh -s -- -y --profile minimal --default-toolchain stable && \
         ./scripts/build-anydoc-lib.sh; \
     fi
