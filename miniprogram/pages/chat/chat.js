@@ -10,7 +10,7 @@ function buildViewModel() {
     chatSubtitle: messages.chatSubtitle,
     questionLabel: messages.question,
     questionPlaceholder: messages.questionPlaceholder,
-    askText: messages.askZS-HiAI,
+    askText: messages.askHiAI,
     answerLabel: messages.answer
   };
 }
@@ -18,10 +18,10 @@ function buildViewModel() {
 Page({
   data: {
     chatTitle: "知识问答",
-    chatSubtitle: "向当前选中的 ZS-HiAI 知识库提问。",
+    chatSubtitle: "向当前选中的 HiAI 知识库提问。",
     questionLabel: "问题",
     questionPlaceholder: "输入你的问题…",
-    askText: "向 ZS-HiAI 提问",
+    askText: "向 HiAI 提问",
     answerLabel: "回答",
     answer: "",
     displayAnswer: "",

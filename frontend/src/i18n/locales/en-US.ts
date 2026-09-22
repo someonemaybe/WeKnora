@@ -224,12 +224,12 @@ export default {
     reopen: 'Product tour',
     steps: {
       welcome: {
-        title: 'Welcome to ZS-HiAI',
+        title: 'Welcome to HiAI',
         desc: 'A few quick steps to get you familiar with knowledge bases, chat and agents. Click "Next" to begin.'
       },
       knowledge: {
         title: 'Create your knowledge base',
-        desc: 'Everything starts here: upload documents, web pages or FAQs and ZS-HiAI parses and indexes them automatically. Click here to open knowledge bases.'
+        desc: 'Everything starts here: upload documents, web pages or FAQs and HiAI parses and indexes them automatically. Click here to open knowledge bases.'
       },
       chat: {
         title: 'Start an AI chat',
@@ -1283,12 +1283,12 @@ export default {
       backendDescriptions: {
         cube: 'Self-hosted MicroVM cluster for private or on-premises deployments',
         e2b: 'Managed MicroVM service or an E2B-compatible deployment',
-        docker: 'Keep a long-lived container per session on this ZS-HiAI host; scripts and files stay in that container',
+        docker: 'Keep a long-lived container per session on this HiAI host; scripts and files stay in that container',
       },
       dockerDisabledAlert: 'Docker sandbox is not enabled on this deployment',
       dockerDisabledHint: 'A local docker.sock is equivalent to root on the host. For a single-machine private install, a system admin can enable it under Settings → System settings → Network security.',
       dockerDisabledCard: 'Docker sandbox is disabled on this deployment; this config will not create containers',
-      dockerHostRisk: 'Empty or unix:// uses the Docker daemon on the ZS-HiAI host, which is equivalent to root on that machine. Use this only for a private single-node install. Prefer Cube or E2B when multiple workspaces share a host. Remote tcp:// endpoints require a TLS certificate directory.',
+      dockerHostRisk: 'Empty or unix:// uses the Docker daemon on the HiAI host, which is equivalent to root on that machine. Use this only for a private single-node install. Prefer Cube or E2B when multiple workspaces share a host. Remote tcp:// endpoints require a TLS certificate directory.',
       addConfig: 'Add sandbox',
       viewClusterGuide: 'Cluster setup guide',
       configName: 'Config name',
@@ -1381,11 +1381,11 @@ export default {
       policySaveFailed: 'Failed to update sandbox execution policy',
       legacyConfig: 'Deprecated',
       namedBackendHint: 'Workspace configuration is the only runtime source. Agents without one cannot execute skill scripts.',
-      weknoraTemplateTitle: 'ZS-HiAI standard template',
-      weknoraDockerImage: 'ZS-HiAI standard image',
+      weknoraTemplateTitle: 'HiAI standard template',
+      weknoraDockerImage: 'HiAI standard image',
       weknoraDockerImageHint: 'Each session gets its own long-lived container. Scripts, shell commands and files all share it until the session ends or the idle timeout reclaims it.',
-      weknoraTemplateOverview: 'ZS-HiAI provides the standard runtime. Templates are discovered after connecting and the standard one is created when missing.',
-      weknoraTemplateDescription: 'Includes the Python, Node.js, CLI tools, workspace path, and non-root execution user expected by ZS-HiAI skills.',
+      weknoraTemplateOverview: 'HiAI provides the standard runtime. Templates are discovered after connecting and the standard one is created when missing.',
+      weknoraTemplateDescription: 'Includes the Python, Node.js, CLI tools, workspace path, and non-root execution user expected by HiAI skills.',
       recommendedTag: 'Recommended',
       cardTemplateConfigured: 'Template configured',
       cardCredentialMissing: 'API key missing',
@@ -1400,9 +1400,9 @@ export default {
       refreshTemplates: 'Refresh templates',
       templateSelectHelp: 'Templates are loaded from this cluster. The saved configuration stores the ID automatically.',
       templateSelectPlaceholder: 'Connect to the cluster to load templates',
-      templateLoadHint: 'Enter the cluster connection and refresh. Missing ZS-HiAI CLI templates are built from the official Hub image. Desktop templates are larger; create them from the row below. After changing DNS or the image, rebuild from that card.',
+      templateLoadHint: 'Enter the cluster connection and refresh. Missing HiAI CLI templates are built from the official Hub image. Desktop templates are larger; create them from the row below. After changing DNS or the image, rebuild from that card.',
       templateLoadFailed: 'Failed to load templates',
-      standardTemplateProvisioning: 'The ZS-HiAI standard template is being created. Refresh shortly to see its status.',
+      standardTemplateProvisioning: 'The HiAI standard template is being created. Refresh shortly to see its status.',
       standardTemplateReplaced: 'The previous standard template was deleted and a rebuild has started. Wait until it is ready.',
       templateNotReady: 'The selected template is not ready. Refresh and wait for the build to finish.',
       connectionPassed: 'Connection verified. Templates below are loaded from this cluster.',
@@ -1410,21 +1410,21 @@ export default {
       templateStepHint: 'This step lists cluster templates and builds the official CLI image if it is missing. Desktop (XFCE) templates are heavier and are created only when you click Create. After changing DNS or the image, rebuild that card. You can continue after a template is ready.',
       loadingTemplates: 'Loading templates from the cluster...',
       templateBuildingHint: 'This template is being built. The list will refresh.',
-      templateUntaggedHint: 'The builds finished but none carries the default tag, so sandbox creation cannot resolve this template. Delete it in E2B and refresh; ZS-HiAI will rebuild it.',
+      templateUntaggedHint: 'The builds finished but none carries the default tag, so sandbox creation cannot resolve this template. Delete it in E2B and refresh; HiAI will rebuild it.',
       templateFailedReason: 'Build failed: {reason}',
       noTemplates: 'No templates were returned by this cluster.',
-      weknoraStandardTemplate: 'ZS-HiAI standard template',
+      weknoraStandardTemplate: 'HiAI standard template',
       createStandardTemplate: 'Create',
       createStandardTemplateHint: 'Built with the current connection settings, including DNS. After changing those settings, rebuild from the card.',
-      weknoraDesktopTemplate: 'ZS-HiAI desktop template',
+      weknoraDesktopTemplate: 'HiAI desktop template',
       createDesktopTemplate: 'Create',
       createDesktopTemplateHint: 'Builds an XFCE graphical desktop from the official desktop image. It is much larger than the CLI template; create it only when you need a GUI.',
       replaceStandardTemplate: 'Rebuild',
-      replaceStandardTemplateConfirm: 'Rebuild the ZS-HiAI standard template with the current settings, including DNS. The previous spawnable template is not deleted until the replacement is ready.',
-      desktopTemplateProvisioning: 'The ZS-HiAI desktop template is being created. Refresh shortly to see its status.',
+      replaceStandardTemplateConfirm: 'Rebuild the HiAI standard template with the current settings, including DNS. The previous spawnable template is not deleted until the replacement is ready.',
+      desktopTemplateProvisioning: 'The HiAI desktop template is being created. Refresh shortly to see its status.',
       desktopTemplateReplaced: 'The previous desktop template was deleted and a rebuild has started. Wait until it is ready. The CLI template is left untouched.',
       desktopTemplateTag: 'Desktop',
-      replaceDesktopTemplateConfirm: 'Rebuild the ZS-HiAI desktop template with the current settings, including DNS. The previous spawnable desktop template is not deleted until the replacement is ready. The CLI template is left untouched.',
+      replaceDesktopTemplateConfirm: 'Rebuild the HiAI desktop template with the current settings, including DNS. The previous spawnable desktop template is not deleted until the replacement is ready. The CLI template is left untouched.',
       templateLockedBySkills: 'This sandbox already has skills. The skill environment is bound to the current snapshot, so the runtime template cannot be changed or rebuilt. Create a new sandbox and install skills from the new template.',
       templateLockedByInFlight: 'A skill is still installing or being removed. The runtime template cannot be changed or rebuilt until that finishes.',
       templateUnnamed: 'Unnamed template',
@@ -1454,7 +1454,7 @@ export default {
       cubeApiKeyOptional: 'Optional — leave empty for an unauthenticated self-hosted CubeSandbox',
       cubeApiKeyWhere: 'How to enable auth on a self-hosted cluster',
       cubeDnsServers: 'DNS servers',
-      cubeDnsServersHelp: 'Optional. Nameserver IPs written into the ZS-HiAI standard template. Leave empty to use the cluster default (commonly 119.29.29.29). If UDP/53 to public resolvers is blocked, use reachable addresses from the Cube host\'s /etc/resolv.conf, excluding 10/8, 172.16/12, and 192.168/16. Existing standard templates take effect only after Rebuild on the template card.',
+      cubeDnsServersHelp: 'Optional. Nameserver IPs written into the HiAI standard template. Leave empty to use the cluster default (commonly 119.29.29.29). If UDP/53 to public resolvers is blocked, use reachable addresses from the Cube host\'s /etc/resolv.conf, excluding 10/8, 172.16/12, and 192.168/16. Existing standard templates take effect only after Rebuild on the template card.',
       cubeDnsServersPlaceholder: 'e.g. 8.8.8.8, press Enter to add',
       e2bApiKeyHelp: 'Create one on the API Keys page of the E2B dashboard; it usually starts with e2b_.',
       e2bApiKeyWhere: 'Get an API key from the E2B dashboard',
@@ -1484,9 +1484,9 @@ export default {
       dockerHost: 'Docker daemon endpoint',
       dockerHostHelp: 'Empty follows the local docker CLI (DOCKER_HOST or the current docker context), so you do not have to type /var/run/docker.sock. For a remote daemon use tcp://host:2376, fill in the TLS certificate directory, and turn on "allow private endpoints" for RFC1918 addresses.',
       dockerTlsCertPath: 'TLS certificate directory',
-      dockerTlsCertPathHelp: 'Directory on the ZS-HiAI host holding ca.pem, cert.pem and key.pem. Required for a remote daemon; certificates are mounted by the deployment, never stored here.',
+      dockerTlsCertPathHelp: 'Directory on the HiAI host holding ca.pem, cert.pem and key.pem. Required for a remote daemon; certificates are mounted by the deployment, never stored here.',
       dockerIdleTtl: 'Idle reclaim (seconds)',
-      dockerIdleTtlHelp: 'The Docker daemon has no idle timeout of its own. A container that runs no command for this long is reclaimed by ZS-HiAI and rebuilt when the session continues. Empty means 1800 seconds.',
+      dockerIdleTtlHelp: 'The Docker daemon has no idle timeout of its own. A container that runs no command for this long is reclaimed by HiAI and rebuilt when the session continues. Empty means 1800 seconds.',
       dockerCpuLimit: 'CPU cores',
       dockerCpuLimitHelp: 'CPU cores available to one sandbox; 0 uses the built-in default.',
       dockerMemoryLimit: 'Memory limit (MB)',
@@ -1746,37 +1746,37 @@ export default {
     },
     capabilityUnavailable: 'This feature is not supported by the current deployment. You have been returned to an available page.',
     weknoraCloud: {
-      title: 'ZS-HiAI Cloud',
-      description: 'Configure ZS-HiAI Cloud APPID and APPSECRET credentials. Credentials are used for model services and document parsing engine.',
+      title: 'HiAI Cloud',
+      description: 'Configure HiAI Cloud APPID and APPSECRET credentials. Credentials are used for model services and document parsing engine.',
       viewDocs: 'View Docs',
       unconfigured: 'Credentials not configured. Please fill in APPID and APPSECRET.',
       configured: 'Credentials configured and working.',
-      expired: 'ZS-HiAI Cloud credentials expired',
+      expired: 'HiAI Cloud credentials expired',
       expiredDefault: 'Encryption key changed after service restart. Saved credentials cannot be decrypted. Please re-enter credentials.',
       reconfigure: 'Reconfigure',
       appIdLabel: 'APPID',
-      appIdDesc: 'ZS-HiAI Cloud application ID',
+      appIdDesc: 'HiAI Cloud application ID',
       appIdPlaceholder: 'Enter APPID',
       appSecretLabel: 'APPSECRET',
-      appSecretDesc: 'ZS-HiAI Cloud application secret',
+      appSecretDesc: 'HiAI Cloud application secret',
       appSecretPlaceholder: 'Enter APPSECRET',
       saveHint: 'Credentials will be validated and encrypted before saving.',
       saveBtn: 'Save Credentials',
       usageTitle: 'Usage Guide',
-      usageSteps: '1. Save APPID and APPSECRET\n2. Register chat, embedding, rerank, and vlm in Cloud Models below\n3. Parser: Knowledge Base Settings → Parser Engine → ZS-HiAI Cloud',
+      usageSteps: '1. Save APPID and APPSECRET\n2. Register chat, embedding, rerank, and vlm in Cloud Models below\n3. Parser: Knowledge Base Settings → Parser Engine → HiAI Cloud',
       fillRequired: 'Please fill in APPID and APPSECRET',
       saveSuccess: 'Credentials saved successfully',
       saveFailed: 'Failed to save credentials',
-      credentialConfigured: 'ZS-HiAI Cloud credentials configured.',
+      credentialConfigured: 'HiAI Cloud credentials configured.',
       credentialExpired: 'Credentials expired. Please reconfigure.',
-      credentialUnconfigured: 'ZS-HiAI Cloud credentials not configured. Please set up APPID and APPSECRET first.',
+      credentialUnconfigured: 'HiAI Cloud credentials not configured. Please set up APPID and APPSECRET first.',
       checkingStatus: 'Checking credential status...',
       goToSettings: 'Go to Settings',
-      modelHintConfigured: 'ZS-HiAI Cloud credentials configured. See supported models in',
+      modelHintConfigured: 'HiAI Cloud credentials configured. See supported models in',
       modelHintDocsLink: 'API docs',
       modelsSection: {
         title: 'Cloud Models',
-        descReady: 'Register the four standard ZS-HiAI Cloud models for chat, retrieval, reranking, and vision.',
+        descReady: 'Register the four standard HiAI Cloud models for chat, retrieval, reranking, and vision.',
         descPending: 'Save credentials above before adding cloud models here.',
         statusAdded: 'Added',
         statusPending: 'Credentials required',
@@ -1792,10 +1792,10 @@ export default {
       addModelsFailed: 'Failed to add models',
       addModelsEmbeddingFailed: 'Embedding connection test failed; could not detect vector dimension',
       addModelsDisplayName: {
-        chat: 'ZS-HiAI Cloud Chat',
-        embedding: 'ZS-HiAI Cloud Embedding',
-        rerank: 'ZS-HiAI Cloud ReRank',
-        vllm: 'ZS-HiAI Cloud Vision'
+        chat: 'HiAI Cloud Chat',
+        embedding: 'HiAI Cloud Embedding',
+        rerank: 'HiAI Cloud ReRank',
+        vllm: 'HiAI Cloud Vision'
       }
     },
     system: 'System Settings',
@@ -2181,7 +2181,7 @@ export default {
   },
   envVarSettings: {
     title: 'Sandbox secrets',
-    description: 'Personal keys for skills and sandboxes, not ZS-HiAI system or deployment settings.',
+    description: 'Personal keys for skills and sandboxes, not HiAI system or deployment settings.',
     helpAria: 'About sandbox secrets',
     introPersonalTitle: 'Yours only',
     introPersonalBody: 'Injected into your own chats and runs. Other members cannot see them, and theirs will not replace yours.',
@@ -2403,11 +2403,11 @@ export default {
     haveAccount: 'Already have an account?',
     backToLogin: 'Back to Login',
     loginHint: 'Sign in to continue, or create an account below if this is your first time.',
-    firstTime: 'New to ZS-HiAI?',
+    firstTime: 'New to HiAI?',
     registerSuccess: 'Registration successful. Please sign in',
     registerFailed: 'Registration failed',
     subtitle: 'RAG Q&A, ReAct Agent and Wiki — an LLM-powered enterprise knowledge framework',
-    registerSubtitle: 'Create your account and start using ZS-HiAI',
+    registerSubtitle: 'Create your account and start using HiAI',
     emailPlaceholder: 'Enter email address',
     passwordPlaceholder: 'Enter password',
     confirmPasswordPlaceholder: 'Enter password again',
@@ -2690,7 +2690,7 @@ export default {
     goToAgentSettings: 'Go to agent settings'
   },
   createChat: {
-    title: 'Hi, I am ZS-HiAI — your knowledge, within reach',
+    title: 'Hi, I am HiAI — your knowledge, within reach',
     newSessionTitle: 'New Session',
     messages: {
       createFailed: 'Failed to create session',
@@ -2799,7 +2799,7 @@ export default {
     welcomeMessageDesc: 'Shown in the embed chat before the visitor sends their first message; leave blank to hide',
     showSuggestedQuestions: 'Suggested questions',
     showSuggestedQuestionsDesc: 'Show starter prompts before the first visitor message, from agent config and linked knowledge bases',
-    originsHint: 'Enter the host websites allowed to embed this channel (A), not the ZS-HiAI address (B). One full origin per line, e.g. https://shop.example.com; at least one required. Supports *.example.com.',
+    originsHint: 'Enter the host websites allowed to embed this channel (A), not the HiAI address (B). One full origin per line, e.g. https://shop.example.com; at least one required. Supports *.example.com.',
     originsRequired: 'At least one allowed origin is required',
     originsInvalid: 'Invalid origin: {origin}',
     originsWildcardProd: 'Wildcard origin \'*\' is not allowed in production',
@@ -2858,7 +2858,7 @@ export default {
     allowFileUploadDesc: 'When enabled, visitors can upload images and document attachments. Requires the bound agent to support image upload.',
     webhookUrl: 'Webhook URL',
     webhookUrlPlaceholder: 'https://your-server.example.com/weknora/embed-events',
-    webhookUrlDesc: 'Optional. ZS-HiAI POSTs message_sent / message_received events to this HTTPS endpoint.',
+    webhookUrlDesc: 'Optional. HiAI POSTs message_sent / message_received events to this HTTPS endpoint.',
     webhookSecret: 'Webhook secret',
     webhookSecretPlaceholder: 'HMAC-SHA256 secret (X-WeKnora-Signature header)',
     webhookSecretKeep: 'Leave blank to keep the saved secret',
@@ -5844,8 +5844,8 @@ export default {
           desc: 'PaddleOCR-VL Cloud API'
         },
         weknoracloud: {
-          name: 'ZS-HiAI Cloud',
-          desc: 'Document parsing via ZS-HiAI Cloud'
+          name: 'HiAI Cloud',
+          desc: 'Document parsing via HiAI Cloud'
         },
         markitdown: {
           name: 'MarkItDown',
@@ -6752,7 +6752,7 @@ export default {
   },
   integrations: {
     cli: {
-      title: 'ZS-HiAI CLI',
+      title: 'HiAI CLI',
       subtitle: 'Manage knowledge bases and documents, search content, and ask questions from your terminal. Connect scripts and AI tools through the CLI or MCP.',
       docs: 'CLI documentation',
       docsHint: 'Installation and complete command reference',
@@ -6931,7 +6931,7 @@ export default {
       capabilityMessageHistory: 'Message history',
       capabilityMessageHistoryHint: 'Let this key search workspace chat history and read chat-history stats. It does not grant workspace configuration access.',
       capabilityManageModels: 'Manage models',
-      capabilityManageModelsHint: 'Manage model definitions, credentials, connectivity checks, and ZS-HiAI Cloud credentials.',
+      capabilityManageModelsHint: 'Manage model definitions, credentials, connectivity checks, and HiAI Cloud credentials.',
       capabilityManageMcpServices: 'Manage MCP services',
       capabilityManageMcpServicesHint: 'Manage MCP services, credentials, tool approval policies, and OAuth state for this principal.',
       capabilityManageDatasources: 'Manage data sources',
@@ -6978,14 +6978,14 @@ export default {
       directWarning: 'Direct user ID trusts the caller-supplied header. Use only for trusted server-to-server calls.',
       directWarningDetail: 'Anyone with the API key can change the user ID header to impersonate another external user and reuse or hijack that user\'s MCP OAuth authorization. Do not use this from browsers or untrusted clients; use Signed token for end-user apps.',
       signedRecommended: 'Recommended for user-facing apps: your backend signs a short-lived HS256 JWT for the external user.',
-      signedFlowDetail: 'Keep the HMAC secret only on ZS-HiAI and your trusted backend—never put it in requests or ship it to browsers. The request header carries the JWT string signed with that secret (it changes on each issuance or after expiry), not the secret itself. JWT must include sub (external user ID), tenant_id, aud=weknora, and exp (max 24h lifetime).',
+      signedFlowDetail: 'Keep the HMAC secret only on HiAI and your trusted backend—never put it in requests or ship it to browsers. The request header carries the JWT string signed with that secret (it changes on each issuance or after expiry), not the secret itself. JWT must include sub (external user ID), tenant_id, aud=weknora, and exp (max 24h lifetime).',
       directHeader: 'User ID header',
       requireDirectHeader: 'Require user ID header',
       requireDirectHeaderDesc: 'When enabled, API Key requests without the user ID header are rejected; when disabled, all requests are treated as the whole workspace with no per-user distinction.',
       tokenHeader: 'Token header',
       tokenHeaderDesc: 'Clients send the backend-signed JWT in this fixed header.',
       hmacSecret: 'HMAC secret',
-      hmacSecretDesc: 'Same secret stored in ZS-HiAI; used only on your backend to sign JWTs—never send it as a request header.',
+      hmacSecretDesc: 'Same secret stored in HiAI; used only on your backend to sign JWTs—never send it as a request header.',
       secretConfigured: 'Secret configured (not shown again); enter a new value to rotate',
       secretSavedCopyHint: 'Secret saved. Copy it to your backend now — you will not be able to view it again after leaving this page.',
       generateSecret: 'Generate secret',
@@ -7059,7 +7059,7 @@ export default {
     },
     chrome: {
       title: 'Knowledge Assistant',
-      subtitle: 'For self-hosted ZS-HiAI: ask questions in a sidebar, clip web pages, and save Markdown notes into your knowledge bases while you browse.',
+      subtitle: 'For self-hosted HiAI: ask questions in a sidebar, clip web pages, and save Markdown notes into your knowledge bases while you browse.',
       capabilitiesTitle: 'Core capabilities',
       capabilities: {
         qa: {
@@ -7093,7 +7093,7 @@ export default {
         },
         port: {
           title: 'Desktop: fixed port (recommended)',
-          desc: 'On ZS-HiAI Desktop, set a fixed API port (e.g. 37841) in API Info so the URL stays stable across restarts.'
+          desc: 'On HiAI Desktop, set a fixed API port (e.g. 37841) in API Info so the URL stays stable across restarts.'
         },
         install: {
           title: 'Install the extension',
@@ -7112,8 +7112,8 @@ export default {
       storeMeta: 'Chrome Web Store · v1.0.0'
     },
     claw: {
-      title: 'ZS-HiAI Skill',
-      subtitle: 'Import documents and run hybrid retrieval (vector + keyword) via the ZS-HiAI REST API—for uploads, URL imports, Markdown entries, and cross-KB search.',
+      title: 'HiAI Skill',
+      subtitle: 'Import documents and run hybrid retrieval (vector + keyword) via the HiAI REST API—for uploads, URL imports, Markdown entries, and cross-KB search.',
       capabilitiesTitle: 'Skill capabilities',
       capabilities: {
         upload: {
@@ -7162,7 +7162,7 @@ export default {
       copyCmdSuccess: 'Install command copied',
       ecosystemNote: 'Skill hosted on ClawHub ({\'@\'}lyingbug/weknora). See the ClawHub page for full API docs and version history.',
       installCta: 'Open ClawHub',
-      installCtaHint: 'Install ZS-HiAI Skill · opens in a new tab',
+      installCtaHint: 'Install HiAI Skill · opens in a new tab',
       hubMeta: 'ClawHub · {\'@\'}lyingbug/weknora · MIT-0'
     }
   },

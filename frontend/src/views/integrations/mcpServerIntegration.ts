@@ -1,5 +1,5 @@
 /**
- * Pure helpers for the "ZS-HiAI as MCP server" integration page. Kept free
+ * Pure helpers for the "HiAI as MCP server" integration page. Kept free
  * of Vue so the snippet builders can be unit-tested with node:test.
  */
 

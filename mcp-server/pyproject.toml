@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tencent-weknora-mcp"
 version = "1.1.1"
-description = "ZS-HiAI MCP Server - Model Context Protocol server for ZS-HiAI API"
+description = "HiAI MCP Server - Model Context Protocol server for HiAI API"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "ZS-HiAI Team", email = "support@weknora.com"}
+    {name = "HiAI Team", email = "support@weknora.com"}
 ]
 maintainers = [
-    {name = "ZS-HiAI Team", email = "support@weknora.com"}
+    {name = "HiAI Team", email = "support@weknora.com"}
 ]
 keywords = ["mcp", "model-context-protocol", "weknora", "knowledge-management", "api-server"]
 classifiers = [

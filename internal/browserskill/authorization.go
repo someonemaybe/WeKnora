@@ -118,7 +118,7 @@ func (m *Manager) AuthorizeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).
 		Encode(map[string]any{
-			"device_id": record.ID, "service_name": "ZS-HiAI",
+			"device_id": record.ID, "service_name": "HiAI",
 			"expires_at": record.ExpiresAt, "renew_after": record.RenewAfter,
 		})
 }

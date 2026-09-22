@@ -314,7 +314,7 @@ func (c *mcpGoClient) checkErrorAndDisconnectIfNeeded(err error) {
 	}
 }
 
-// oauthCall runs one MCP operation with ZS-HiAI-owned token lifecycle checks.
+// oauthCall runs one MCP operation with HiAI-owned token lifecycle checks.
 // A resource-server 401 forces exactly one refresh and one retry. Other errors
 // are never retried, which avoids duplicating tool side effects after ambiguous
 // network failures.
@@ -386,7 +386,7 @@ func (c *mcpGoClient) Initialize(ctx context.Context) (*InitializeResult, error)
 			ProtocolVersion: mcp.LATEST_PROTOCOL_VERSION,
 			Capabilities:    mcp.ClientCapabilities{},
 			ClientInfo: mcp.Implementation{
-				Name:    "ZS-HiAI",
+				Name:    "HiAI",
 				Version: "1.0.0",
 			},
 		},

@@ -5,15 +5,15 @@
   "frontend:dir": "../../frontend",
   "wailsjsdir": "../../frontend/src",
   "author": {
-    "name": "ZS-HiAI Team",
+    "name": "HiAI Team",
     "email": ""
   },
   "info": {
     "companyName": "ZS",
-    "productName": "ZS-HiAI Lite",
+    "productName": "HiAI Lite",
     "productVersion": "1.0.0",
     "copyright": "Copyright 2026 ZS",
-    "comments": "ZS-HiAI Desktop Edition"
+    "comments": "HiAI Desktop Edition"
   },
   "mac": {
     "category": "public.app-category.productivity",

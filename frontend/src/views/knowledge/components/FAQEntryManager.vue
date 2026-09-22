@@ -2229,10 +2229,10 @@ const downloadExampleOptions = computed(() => [
 // 示例数据
 const exampleData: FAQEntryPayload[] = [
   {
-    standard_question: '什么是 ZS-HiAI？',
-    answers: ['ZS-HiAI 是一个智能知识库管理系统', '它支持多种知识库类型和导入方式'],
-    similar_questions: ['ZS-HiAI 是什么？', '介绍一下 ZS-HiAI'],
-    negative_questions: ['这不是 ZS-HiAI', '与 ZS-HiAI 无关'],
+    standard_question: '什么是 HiAI？',
+    answers: ['HiAI 是一个智能知识库管理系统', '它支持多种知识库类型和导入方式'],
+    similar_questions: ['HiAI 是什么？', '介绍一下 HiAI'],
+    negative_questions: ['这不是 HiAI', '与 HiAI 无关'],
     tag_name: '产品介绍',
   },
   {

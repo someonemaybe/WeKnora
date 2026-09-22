@@ -262,7 +262,7 @@ const reportIssueURL = computed(() => {
   if (errMsg) {
     const body = [
       '### Environment',
-      `- ZS-HiAI version: ${systemInfo.value?.version || 'unknown'}`,
+      `- HiAI version: ${systemInfo.value?.version || 'unknown'}`,
       `- Commit: ${systemInfo.value?.commit_id || 'unknown'}`,
       `- Frontend version: ${frontendVersion} (${frontendCommit})`,
       `- DB version reported: ${systemInfo.value?.db_version || 'unknown'}`,

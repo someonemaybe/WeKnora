@@ -20,7 +20,7 @@
               <line x1="2.94" y1="12.5" x2="15.06" y2="12.5" stroke="currentColor" stroke-width="1.2"
                 stroke-linecap="round" />
             </svg>
-            <!-- ZS-HiAI Cloud 使用自定义 W 图标 -->
+            <!-- HiAI Cloud 使用自定义 W 图标 -->
             <svg v-else-if="item.key === 'weknoracloud'" width="17" height="17" viewBox="0 0 18 18"
               fill="none" xmlns="http://www.w3.org/2000/svg" class="nav-icon">
               <rect x="1.5" y="1.5" width="15" height="15" rx="3.5" stroke="currentColor" stroke-width="1.2"
@@ -84,7 +84,7 @@
           <OllamaSettings />
         </div>
 
-        <!-- ZS-HiAI Cloud -->
+        <!-- HiAI Cloud -->
         <div v-if="currentSection === 'weknoracloud'" class="section">
           <WeKnoraCloudSettings />
         </div>

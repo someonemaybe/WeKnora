@@ -11,7 +11,7 @@ import (
 func main() {
 	app := NewApp()
 	_ = wails.Run(&options.App{
-		Title: "ZS-HiAI Lite",
+		Title: "HiAI Lite",
 		Bind:  []interface{}{app},
 	})
 }

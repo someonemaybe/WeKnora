@@ -61,9 +61,9 @@ const repo = 'https://github.com/Tencent/WeKnora'
 
 export default withMermaid(
   defineConfig({
-    title: 'ZS-HiAI',
-    titleTemplate: ':title · ZS-HiAI 文档',
-    description: 'ZS-HiAI 官方文档：部署、配置、功能说明、API 参考与二次开发',
+    title: 'HiAI',
+    titleTemplate: ':title · HiAI 文档',
+    description: 'HiAI 官方文档：部署、配置、功能说明、API 参考与二次开发',
     lang: 'zh-CN',
     base: '/docs/',
     cleanUrls: true,
@@ -80,7 +80,7 @@ export default withMermaid(
       ['link', { rel: 'icon', href: '/docs/favicon.ico', type: 'image/x-icon' }],
       ['meta', { name: 'theme-color', content: '#101f38' }],
       ['meta', { property: 'og:type', content: 'website' }],
-      ['meta', { property: 'og:title', content: 'ZS-HiAI 文档' }],
+      ['meta', { property: 'og:title', content: 'HiAI 文档' }],
       [
         'meta',
         {
@@ -105,7 +105,7 @@ export default withMermaid(
 
     themeConfig: {
       logoLink: { link: '/', target: '_self' },
-      siteTitle: 'ZS-HiAI',
+      siteTitle: 'HiAI',
 
       nav: [],
 
@@ -163,8 +163,8 @@ export default withMermaid(
       },
 
       footer: {
-        message: `基于 ZS-HiAI ${repoVersionLabel} 源码整理 · MIT License`,
-        copyright: '© Tencent ZS-HiAI',
+        message: `基于 HiAI ${repoVersionLabel} 源码整理 · MIT License`,
+        copyright: '© Tencent HiAI',
       },
     },
 
