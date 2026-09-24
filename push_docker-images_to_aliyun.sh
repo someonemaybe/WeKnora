@@ -15,23 +15,37 @@ IMAGES=(
     "hiai/hiai-sandbox:main-desktop"
     "hiai/hiai-sandbox:main-desktop-cube"
     "hiai/hiai-ui:latest"
+
+    # 新增镜像
+    "paradedb/paradedb:v0.22.6-pg17"
+    "redis:7.0-alpine"
 )
 
 for IMAGE in "${IMAGES[@]}"; do
-    # 提取镜像名称和 Tag
+
+    # 提取 Repository
     REPOSITORY="${IMAGE%%:*}"
+
+    # 提取 Tag
     TAG="${IMAGE##*:}"
 
-    # 提取最后一级镜像名
+    # 取 Repository 最后一段作为阿里云仓库名称
     IMAGE_NAME="${REPOSITORY##*/}"
 
-    # 阿里云镜像地址
+    # 拼接阿里云完整镜像地址
     ALIYUN_IMAGE="${REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${TAG}"
 
+    echo
     echo "=========================================="
     echo "本地镜像：${IMAGE}"
-    echo "目标镜像：${ALIYUN_IMAGE}"
+    echo "阿里云镜像：${ALIYUN_IMAGE}"
     echo "=========================================="
+
+    # 检查本地镜像是否存在
+    if ! docker image inspect "${IMAGE}" >/dev/null 2>&1; then
+        echo "❌ 本地镜像不存在：${IMAGE}"
+        exit 1
+    fi
 
     echo "[1/2] Docker Tag..."
     docker tag "${IMAGE}" "${ALIYUN_IMAGE}"
@@ -50,9 +64,9 @@ for IMAGE in "${IMAGES[@]}"; do
     fi
 
     echo "✅ Push 成功：${ALIYUN_IMAGE}"
-    echo
 done
 
+echo
 echo "=========================================="
 echo "🎉 所有镜像 Push 完成"
 echo "=========================================="

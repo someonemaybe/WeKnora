@@ -18,7 +18,7 @@ HiAI-app 容器里没有 Docker 套接字。当前 compose 里 /var/run/docker.s
 - /var/run/docker.sock:/var/run/docker.sock
 本机还要先有这个镜像（docker images 里能看到 hiai/hiai-sandbox:main 或 :latest）。没有的话先构建：
 ./scripts/build_images.sh --sandbox
-镜像名保持 hiai/hiai-sandbox:main 即可，不必改回 wechatopenai/weknora-sandbox。
+镜像名保持 hiai/hiai-sandbox:main 即可。
 
 
 ### 开启知识图谱功能

@@ -15,29 +15,21 @@ IMAGES=(
     "hiai/hiai-sandbox:main-desktop"
     "hiai/hiai-sandbox:main-desktop-cube"
     "hiai/hiai-ui:latest"
-
-    # 新增镜像
-    "paradedb/paradedb:v0.22.6-pg17"
-    "redis:7.0-alpine"
 )
 
 for IMAGE in "${IMAGES[@]}"; do
-
-    # 提取 Repository
+    # 提取镜像名称和 Tag
     REPOSITORY="${IMAGE%%:*}"
-
-    # 提取 Tag
     TAG="${IMAGE##*:}"
 
-    # 取 Repository 最后一段作为阿里云仓库名称
+    # 提取最后一级镜像名
     IMAGE_NAME="${REPOSITORY##*/}"
 
-    # 拼接阿里云完整镜像地址
+    # 阿里云镜像地址
     ALIYUN_IMAGE="${REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${TAG}"
 
-    echo
     echo "=========================================="
-    echo "阿里云镜像：${ALIYUN_IMAGE}"
+    echo "源镜像：${ALIYUN_IMAGE}"
     echo "本地镜像：${IMAGE}"
     echo "=========================================="
 
@@ -58,9 +50,10 @@ for IMAGE in "${IMAGES[@]}"; do
     fi
 
     echo "✅ Pull & Tag 成功：${IMAGE}"
+    echo
 done
 
-echo
 echo "=========================================="
 echo "🎉 所有镜像 Pull 完成"
 echo "=========================================="
+
